@@ -9,11 +9,29 @@ function App() {
   const addTodo = (e) => {
     e.preventDefault();
     const val = InputRef.current ? InputRef.current.value : "";
+    if (val === "") {
+      alert("Can't Add empty todo");
+      return;
+    }
     const arr = [...todoList];
-    arr.push(val);
+    arr.push({ text: val, checked: false });
     console.log("in addTodo", arr);
     setTodoList(arr);
+    InputRef.current.value = "";
   };
+
+  const deleteTodo = (index) => {
+    const ls = [...todoList];
+    ls.splice(index, 1);
+    setTodoList(ls);
+  };
+
+  const setChecked = (check, i) => {
+    const ls = [...todoList];
+    ls[i].checked = check;
+    setTodoList(ls);
+  };
+
   return (
     <div className="main-wrapper">
       <h1>Todoist</h1>
@@ -28,7 +46,13 @@ function App() {
         </form>
         <div className="list-wrapper" id="list-wrapper">
           {todoList.map((li, i) => (
-            <Todo key={i} index={i} list={todoList} setList={setTodoList} />
+            <Todo
+              key={i}
+              index={i}
+              todo={li}
+              deleteTodo={deleteTodo}
+              setChecked={setChecked}
+            />
           ))}
         </div>
       </div>

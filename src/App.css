@@ -46,7 +46,9 @@ h1 {
 }
 
 .todo-text {
-  margin-left: 10px;
+  margin: 0px 10px;
+  min-width: 75%;
+  word-break: break-word;
 }
 .row {
   display: flex;
