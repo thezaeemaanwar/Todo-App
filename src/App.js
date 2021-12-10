@@ -15,7 +15,6 @@ function App() {
     }
     const arr = [...todoList];
     arr.push({ text: val, checked: false });
-    console.log("in addTodo", arr);
     setTodoList(arr);
     InputRef.current.value = "";
   };
